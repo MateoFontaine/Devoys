@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export const Hero = () => {
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen px-4 pt-20 overflow-hidden w-full">
+    <section id="hero" className="relative flex flex-col items-center justify-center min-h-screen px-4 pt-20 overflow-hidden w-full">
       
       {/* --- FONDO ANIMADO (Aurora Cyberpunk) --- */}
       <div className="absolute inset-0 w-full h-full">

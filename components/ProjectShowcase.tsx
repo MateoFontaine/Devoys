@@ -10,7 +10,7 @@ const projects = [
     title: "Padel App",
     category: "Sports & Booking Platform",
     description: "Ecosistema completo para clubes y jugadores. Sistema de reservas en tiempo real, matchmaking inteligente por niveles y pagos divididos automatizados.",
-    tech: ["React Native", "Supabase", "Stripe"],
+    tech: ["React Native", "Supabase", "Next.js"],
     color: "from-emerald-500 to-green-600",
     bgAccent: "bg-emerald-500/10",
     desktopImg: "/proyectos/padel-desktop.png", 
@@ -128,25 +128,7 @@ const ProjectSection = ({ project, index }: { project: any, index: number }) => 
             </div>
           </div>
 
-          {/* 2. PHONE FRAME */}
-          <div className="absolute -bottom-10 -right-4 md:right-10 w-[120px] md:w-[140px] aspect-[9/19.5] bg-black border-[6px] border-[#222] rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20 overflow-hidden">
-             {/* Notch (Cámara Frontal) - CAMBIO: Más pequeño */}
-             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-8 h-2.5 bg-black rounded-full z-30 pointer-events-none"></div>
-             
-             {/* --- IMAGEN MOBILE --- */}
-             <div className="w-full h-full bg-[#0a0a0a] relative overflow-hidden rounded-[1.5rem]">
-                {project.mobileImg ? (
-                  <Image 
-                    src={project.mobileImg} 
-                    alt={`${project.title} Mobile`}
-                    fill
-                    className="object-cover object-top"
-                  />
-                ) : (
-                  <div className={`w-full h-full bg-gradient-to-br ${project.color} opacity-30`}></div>
-                )}
-             </div>
-          </div>
+          
 
         </motion.div>
 

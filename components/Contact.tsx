@@ -37,7 +37,7 @@ export const Contact = () => {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase font-bold">Escríbenos</p>
-                  <a href="mailto:hola@devoys.com" className="text-lg font-medium hover:text-white transition-colors">hola@devoys.com</a>
+                  <a href="mailto:hola@devoys.com" className="text-lg font-medium hover:text-white transition-colors">devoys.desarrollo@gmail.com</a>
                 </div>
               </div>
               

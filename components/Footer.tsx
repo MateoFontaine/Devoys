@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image"; // <--- IMPORTANTE: Importar Image
 import { Github, Instagram, Linkedin, Twitter } from "lucide-react";
 
 export const Footer = () => {
@@ -54,9 +55,17 @@ export const Footer = () => {
           {/* Columna 1: Marca y Misión */}
           <div className="md:col-span-1 space-y-4">
             <div className="flex items-center gap-2">
-               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#f53a87] to-[#c126cb] flex items-center justify-center">
-                  <span className="text-white font-bold">D</span>
+               
+               {/* --- AQUÍ ESTÁ EL LOGO NUEVO --- */}
+               <div className="relative w-8 h-8">
+                  <Image 
+                    src="/logo.png" // <--- CAMBIA ESTO SI TU ARCHIVO TIENE OTRO NOMBRE
+                    alt="Devoys Logo"
+                    fill
+                    className="object-contain"
+                  />
                </div>
+
                <span className="text-xl font-bold text-white tracking-tight">DEVOYS</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
@@ -68,10 +77,10 @@ export const Footer = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Navegación</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-[#f53a87] transition-colors">Inicio</a></li>
-              <li><a href="#proyectos" className="hover:text-[#f53a87] transition-colors">Proyectos</a></li>
-              <li><a href="#servicios" className="hover:text-[#f53a87] transition-colors">Servicios</a></li>
-              <li><a href="#contacto" className="hover:text-[#f53a87] transition-colors">Contacto</a></li>
+              <li><a href="/" className="hover:text-[#f53a87] transition-colors">Inicio</a></li>
+              <li><a href="/proyectos" className="hover:text-[#f53a87] transition-colors">Proyectos</a></li>
+              <li><a href="/#servicios" className="hover:text-[#f53a87] transition-colors">Servicios</a></li>
+              <li><a href="/#contacto" className="hover:text-[#f53a87] transition-colors">Contacto</a></li>
             </ul>
           </div>
 
@@ -90,10 +99,10 @@ export const Footer = () => {
           <div>
             <h4 className="text-white font-bold mb-6">Síguenos</h4>
             <div className="flex gap-4">
-              <SocialIcon icon={<Linkedin size={20} />} href="#" />
-              <SocialIcon icon={<Instagram size={20} />} href="#" />
-              <SocialIcon icon={<Twitter size={20} />} href="#" />
-              <SocialIcon icon={<Github size={20} />} href="#" />
+              <SocialIcon icon={<Linkedin size={20} />} href="https://www.linkedin.com/company/devoys/" />
+              <SocialIcon icon={<Instagram size={20} />} href="https://www.instagram.com/devoys.software/?hl=es-la" />
+              {/* <SocialIcon icon={<Twitter size={20} />} href="#" />
+              <SocialIcon icon={<Github size={20} />} href="#" /> */}
             </div>
           </div>
         </div>

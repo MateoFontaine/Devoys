@@ -1,29 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
     id: 1,
-    title: "Padel App",
-    category: "Sports & Booking Platform",
-    description: "Ecosistema completo para clubes y jugadores. Sistema de reservas en tiempo real, matchmaking inteligente por niveles y pagos divididos automatizados.",
-    tech: ["React Native", "Supabase", "Next.js"],
-    color: "from-emerald-500 to-green-600",
-    bgAccent: "bg-emerald-500/10",
+    title: "PadelGo App",
+    category: "Sports Platform",
+    description: "La forma más rápida de reservar cancha. Ecosistema completo con pagos divididos, matchmaking por niveles y gestión de clubes en tiempo real.",
+    tech: ["React Native", "Supabase", "Stripe"],
+    gradient: "from-[#064e3b] to-[#022c22]", 
+    textColor: "text-emerald-400",
+    borderColor: "group-hover:border-emerald-500/50",
+    buttonColor: "bg-emerald-500 text-black hover:bg-emerald-400",
     desktopImg: "/proyectos/padel-desktop.png", 
     mobileImg: "/proyectos/padel-mobile.png",
   },
   {
     id: 2,
     title: "NLR Abogados",
-    category: "Legal Tech & Corporate",
-    description: "Transformación digital para firma legal líder. Sitio institucional de alto rendimiento con gestión de causas, turnero digital y CMS autoadministrable.",
-    tech: ["Next.js", "Tailwind CSS", "Sanity CMS"],
-    color: "from-slate-700 to-gray-900",
-    bgAccent: "bg-white/5",
+    category: "Corporate & Legal",
+    description: "Identidad digital sobria y de alto rendimiento. CMS autoadministrable para la gestión de causas, blog legal y turnero digital integrado.",
+    tech: ["Next.js", "Tailwind", "Sanity"],
+    gradient: "from-[#1e1b4b] to-[#0f172a]", 
+    textColor: "text-indigo-400",
+    borderColor: "group-hover:border-indigo-500/50",
+    buttonColor: "bg-indigo-500 text-white hover:bg-indigo-400",
     desktopImg: "/proyectos/nlr-desktop.png",
     mobileImg: "/proyectos/nlr-mobile.png",
   },
@@ -31,108 +35,113 @@ const projects = [
 
 export const ProjectShowcase = () => {
   return (
-    <div className="bg-[#000212]">
+    <>
       {projects.map((project, index) => (
-        <ProjectSection key={project.id} project={project} index={index} />
+        <Card 
+          key={project.id} 
+          project={project} 
+          index={index} 
+          total={projects.length} 
+        />
       ))}
-    </div>
+    </>
   );
 };
 
-const ProjectSection = ({ project, index }: { project: any, index: number }) => {
+const Card = ({ project, index, total }: { project: any, index: number, total: number }) => {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 border-b border-white/5 snap-center py-20">
+    // CAMBIO CLAVE: snap-start (o snap-center)
+    // Esto obliga al scroll a detenerse exactamente al inicio de este componente
+    <section className="min-h-screen w-full flex items-center justify-center p-4 md:p-8 bg-[#000212] snap-start border-b border-white/5">
       
-      {/* Luz ambiental de fondo */}
-      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] ${project.bgAccent} rounded-full blur-[150px] opacity-20 pointer-events-none`} />
-
-      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "-10%" }} // Se activa apenas entra
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className={`relative w-full max-w-7xl h-[85vh] md:h-[85vh] rounded-[2.5rem] border border-white/10 bg-[#0a0a0a] overflow-hidden group ${project.borderColor} shadow-2xl`}
+      >
         
-        {/* --- IZQUIERDA: TEXTO --- */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="order-2 lg:order-1"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-xs font-mono text-gray-400">0{index + 1}</span>
-            <div className="h-px w-10 bg-white/20"></div>
-            <span className={`text-xs font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${project.color}`}>
-              {project.category}
-            </span>
-          </div>
+        {/* --- FONDO DEGRADADO --- */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-30`} />
+        
+        {/* --- RUIDO --- */}
+        <div 
+            className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
+        />
 
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            {project.title}
-          </h2>
+        {/* --- CONTENIDO --- */}
+        <div className="relative h-full flex flex-col md:flex-row p-6 md:p-12 gap-8 md:gap-16">
           
-          <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-md">
-            {project.description}
-          </p>
+          {/* IZQUIERDA: Info */}
+          <div className="flex flex-col justify-center w-full md:w-2/5 z-20">
+             <div className="flex items-center gap-4 mb-6">
+                 <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm font-mono text-gray-300">
+                    {index + 1}/{total}
+                 </div>
+                 <span className={`text-xs font-bold uppercase tracking-widest ${project.textColor}`}>
+                    {project.category}
+                 </span>
+             </div>
+             
+             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+               {project.title}
+             </h2>
+             <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-8">
+               {project.description}
+             </p>
 
-          <div className="flex flex-wrap gap-2 mb-10">
-            {project.tech.map((t: string) => (
-              <span key={t} className="px-3 py-1 rounded-full border border-white/10 text-xs text-gray-400 font-mono">
-                {t}
-              </span>
-            ))}
+             <div className="flex flex-wrap gap-2 mb-8">
+                {project.tech.map((t: string) => (
+                  <span key={t} className="px-3 py-1 rounded-full bg-white/5 text-xs text-gray-300 font-mono border border-white/5">
+                    {t}
+                  </span>
+                ))}
+             </div>
+             
+             <button className={`w-fit px-6 py-3 rounded-full flex items-center gap-2 font-bold text-sm transition-transform hover:scale-105 shadow-lg ${project.buttonColor}`}>
+                Ver Proyecto Completo <ArrowUpRight className="w-4 h-4" />
+             </button>
           </div>
 
-          <button className="group flex items-center gap-2 text-white font-bold border-b border-white/20 pb-1 hover:border-white transition-all">
-            Ver Caso de Estudio
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </motion.div>
+          {/* DERECHA: Visuals */}
+          <div className="relative w-full md:w-3/5 h-full flex items-center justify-center md:justify-end">
+             
+             {/* BROWSER (Desktop) */}
+             <div className="relative w-full md:w-[90%] aspect-[16/10] bg-[#1a1a1a] rounded-xl border border-white/10 shadow-2xl transition-transform duration-700 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                {/* Header Browser */}
+                <div className="h-8 bg-[#0f0f0f] rounded-t-xl flex items-center px-4 gap-2 border-b border-white/5">
+                   <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                   </div>
+                   <div className="ml-4 w-full max-w-[200px] h-2 bg-white/5 rounded-full" />
+                </div>
+                {/* Imagen */}
+                <div className="relative w-full h-full bg-black overflow-hidden rounded-b-xl">
+                   {project.desktopImg && (
+                      <Image src={project.desktopImg} alt={project.title} fill className="object-cover object-top" />
+                   )}
+                   {/* Sombra interna */}
+                   <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.6)] pointer-events-none" />
+                </div>
+             </div>
 
-        {/* --- DERECHA: MOCKUPS CON IMÁGENES REALES --- */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="order-1 lg:order-2 relative flex items-center justify-center perspective-1000"
-        >
-          {/* 1. LAPTOP FRAME */}
-          {/* CAMBIO: Usamos aspect-video (16:9) que es el estándar de pantallas HD para que no se corte */}
-          <div className="relative w-[500px] md:w-[650px] aspect-video bg-[#1a1a1a] rounded-t-2xl border-[4px] border-[#2a2a2a] shadow-2xl z-10">
-            {/* Pantalla Laptop */}
-            <div className="w-full h-full bg-black overflow-hidden rounded-t-lg relative flex flex-col">
-              
-              {/* Barra Superior Laptop */}
-              <div className="h-6 bg-[#111] flex items-center px-4 gap-1.5 border-b border-white/5 z-20 relative shrink-0">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
-              </div>
-              
-              {/* --- IMAGEN DESKTOP --- */}
-              <div className="relative w-full h-full">
-                {project.desktopImg ? (
-                  <Image 
-                    src={project.desktopImg} 
-                    alt={`${project.title} Desktop`}
-                    fill
-                    className="object-cover object-top" 
-                  />
-                ) : (
-                   <div className={`w-full h-full bg-gradient-to-br ${project.color} opacity-20`}></div>
-                )}
-              </div>
-            </div>
-            
-            {/* Base Laptop */}
-            <div className="absolute -bottom-4 left-0 w-full h-4 bg-[#222] rounded-b-xl flex justify-center">
-               <div className="w-1/3 h-1 bg-[#333] rounded-b-md"></div>
-            </div>
+             {/* PHONE (Mobile) */}
+             <div className="absolute bottom-[-20px] left-4 md:left-[-20px] w-[80px] md:w-[140px] aspect-[9/19] bg-[#121212] rounded-[1.2rem] md:rounded-[2rem] border-[3px] md:border-[5px] border-[#2a2a2a] shadow-2xl z-30 transition-transform duration-700 group-hover:translate-y-[-15px]">
+                <div className="w-full h-full relative overflow-hidden rounded-[1rem] md:rounded-[1.7rem] bg-black">
+                   {project.mobileImg && (
+                      <Image src={project.mobileImg} alt="Mobile View" fill className="object-cover object-top" />
+                   )}
+                </div>
+             </div>
+
           </div>
 
-          
-
-        </motion.div>
-
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 };

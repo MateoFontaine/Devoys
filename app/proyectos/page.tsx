@@ -2,12 +2,13 @@
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { MouseEvent } from "react";
+import Link from "next/link"; // <--- 1. IMPORTAR LINK
+import { ArrowLeft } from "lucide-react"; // <--- 2. IMPORTAR FLECHA
 import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
 export default function ProjectsPage() {
-  // Lógica Spotlight
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
 
@@ -18,17 +19,23 @@ export default function ProjectsPage() {
   }
 
   return (
-    // CAMBIO CLAVE 1:
-    // h-screen + overflow-y-scroll: Hace que el main tenga su propio scroll
-    // snap-y snap-mandatory: Activa el magnetismo vertical obligatorio
     <main 
       className="bg-[#000212] h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth selection:bg-[#f53a87] selection:text-white"
       onMouseMove={handleMouseMove}
     >
       
+      {/* --- 3. BOTÓN FLOTANTE "VOLVER" (SOLO MOBILE) --- */}
+      {/* Este botón vive fuera de las secciones para quedarse fijo en la pantalla */}
+      <Link 
+        href="/" 
+        className="fixed top-6 left-6 z-50 md:hidden w-10 h-10 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white active:scale-90 transition-transform shadow-lg"
+      >
+          <ArrowLeft size={20} />
+      </Link>
+
+
       {/* --- SECCIÓN 1: HEADER (SNAP START) --- */}
-      {/* Agregamos 'snap-start' y aseguramos que ocupe toda la pantalla (min-h-screen) */}
-      <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden snap-start">
+      <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden snap-start">
          
          {/* Fondo Devoys Gigante */}
          <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
@@ -81,20 +88,27 @@ export default function ProjectsPage() {
               className="text-gray-400 max-w-xl mx-auto text-lg"
             >
               Ingeniería y diseño aplicados a resultados reales.
-              <br />
-              <span className="text-sm opacity-50 mt-4 block animate-bounce">↓ Desliza para ver ↓</span>
             </motion.p>
+            
+            {/* Indicador de Scroll */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, y: [0, 10, 0] }}
+              transition={{ delay: 1, duration: 2, repeat: Infinity }}
+              className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30 text-xs font-mono uppercase tracking-widest"
+            >
+               ↓ Scroll
+            </motion.div>
          </div>
       </section>
 
 
-      {/* --- SECCIÓN 2: PROYECTOS (SNAP INTERNO) --- */}
+      {/* --- SECCIÓN 2: PROYECTOS --- */}
       <ProjectShowcase />
 
 
-      {/* --- SECCIÓN 3: CIERRE (SNAP START) --- */}
-      {/* Agrupamos Contacto y Footer en una sección final magnética */}
-      <section className="relative z-10 bg-[#000212] snap-start min-h-screen flex flex-col justify-end">
+      {/* --- SECCIÓN 3: FOOTER --- */}
+      <section className="relative z-10 bg-[#000212] snap-start min-h-screen flex flex-col justify-end border-t border-white/5">
          <div className="flex-1 flex items-center justify-center">
              <Contact />
          </div>

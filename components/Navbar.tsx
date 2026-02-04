@@ -83,7 +83,7 @@ export const Navbar = () => {
           {/* --- LOGO --- */}
           <Link href="/" className="flex items-center gap-3 group relative w-10 h-10 md:w-14 md:h-12">
              <Image 
-               src="/logo.png" 
+               src="/Logo.png" 
                alt="Devoys Logo"
                fill
                className="object-contain"

@@ -59,7 +59,7 @@ export const Footer = () => {
                {/* --- AQUÍ ESTÁ EL LOGO NUEVO --- */}
                <div className="relative w-8 h-8">
                   <Image 
-                    src="/logo.png" // <--- CAMBIA ESTO SI TU ARCHIVO TIENE OTRO NOMBRE
+                    src="/Logo.png" // <--- CAMBIA ESTO SI TU ARCHIVO TIENE OTRO NOMBRE
                     alt="Devoys Logo"
                     fill
                     className="object-contain"

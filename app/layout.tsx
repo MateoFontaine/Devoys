@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 // 2. SEO Y METADATA COMPLETA
 export const metadata: Metadata = {
   // URL base para que las imágenes de redes sociales funcionen bien
-  metadataBase: new URL("https://devoys.com"), // Cambia esto por tu dominio real cuando lo tengas
+  metadataBase: new URL("https://devoys.com.ar"), // Cambia esto por tu dominio real cuando lo tengas
 
   title: {
     default: "Devoys | Ingeniería de Software & Diseño Digital",
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
   
   // Iconos (Favicon, iOS, Android)
   icons: {
-    icon: "/logo.png", // Icono en la pestaña del navegador
-    shortcut: "/logo.png", // Icono de acceso directo
-    apple: "/logo.png", // Icono para iPhone/iPad (Home Screen)
+    icon: "/Logo.png", // Icono en la pestaña del navegador
+    shortcut: "/Logo.png", // Icono de acceso directo
+    apple: "/Logo.png", // Icono para iPhone/iPad (Home Screen)
   },
 
   // Open Graph (Cómo se ve cuando compartes el link en WhatsApp/LinkedIn)
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     siteName: "Devoys",
     images: [
       {
-        url: "/logo.png", // Imagen que sale en WhatsApp (1200x630px)
+        url: "/Logo.png", // Imagen que sale en WhatsApp (1200x630px)
         width: 1200,
         height: 630,
         alt: "Devoys - Ingeniería Visual",

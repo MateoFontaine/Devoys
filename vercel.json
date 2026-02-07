@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/menu",
-      "destination": "https://menu-digital-chi.vercel.app"
+      "destination": "https://menu-digital-chi.vercel.app/menu"
     },
     {
       "source": "/menu/:path*",
-      "destination": "https://menu-digital-chi.vercel.app/:path*"
+      "destination": "https://menu-digital-chi.vercel.app/menu/:path*"
     }
   ]
 }

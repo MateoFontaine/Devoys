@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/menu",
+      "destination": "https://menu-digital-chi.vercel.app"
+    },
+    {
+      "source": "/menu/:path*",
+      "destination": "https://menu-digital-chi.vercel.app/:path*"
+    }
+  ]
+}

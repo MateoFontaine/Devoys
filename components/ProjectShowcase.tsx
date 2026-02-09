@@ -53,6 +53,27 @@ const projects = [
     desktopImg: "/proyectos/hpenergy-desktop.jpeg",
     mobileImg: "/proyectos/hpenergy-mobile.jpeg",
   },
+  {
+    id: 4,
+    title: "Menu QR",
+    category: "SaaS & Gastronomy",
+    description: "Carta digital inteligente y 100% autogestionable. Panel de administración en tiempo real para cambios de precios, control de stock y categorías dinámicas.",
+    tech: ["Next.js", "Supabase", "Tailwind"], 
+    // Link del proyecto
+    href: "https://devoys.com.ar/menu",
+    
+    // ESTILOS (Gourmet / Apetito)
+    // Fondo: Un "Warm Black" (Stone 950), más cálido que el negro puro.
+    bgColor: "bg-[#1c1917]", 
+    // Acento: Naranja vibrante (estimula el apetito)
+    accentColor: "text-orange-500", 
+    // Botón: Naranja intenso
+    buttonColor: "bg-orange-600 text-white hover:bg-orange-500",
+    
+    // Imágenes
+    desktopImg: "/proyectos/menu-desktop.png",
+    mobileImg: "/proyectos/menu-mobile.png",
+  },
 ];
 
 export const ProjectShowcase = () => {

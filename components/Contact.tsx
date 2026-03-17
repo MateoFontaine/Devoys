@@ -1,9 +1,40 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, MapPin } from "lucide-react";
 
 export const Contact = () => {
+  const [formData, setFormData] = useState({
+    nombre: "",
+    empresa: "",
+    email: "",
+    mensaje: ""
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleWhatsApp = (e) => {
+    e.preventDefault();
+    const { nombre, empresa, email, mensaje } = formData;
+    
+    // Armar el mensaje para WhatsApp
+    let texto = `Hola! Nueva consulta desde la web:\n\n*Nombre:* ${nombre}\n`;
+    if (empresa) texto += `*Empresa:* ${empresa}\n`;
+    texto += `*Email:* ${email}\n*Mensaje:* ${mensaje}`;
+    
+    // Número de teléfono en formato internacional sin el '+'
+    const numero = "5491133139403";
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+    
+    window.open(url, '_blank');
+  };
+
   return (
     <section id="contacto" className="py-24 px-6 relative overflow-hidden">
       
@@ -65,29 +96,60 @@ export const Contact = () => {
           {/* Brillo superior del borde */}
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           
-          <form className="flex flex-col gap-6">
+          <form className="flex flex-col gap-6" onSubmit={handleWhatsApp}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
                 <label className="text-xs font-bold text-gray-500 uppercase">Nombre</label>
-                <input type="text" placeholder="John Doe" className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#f53a87] focus:ring-1 focus:ring-[#f53a87] transition-all" />
+                <input 
+                  type="text" 
+                  name="nombre"
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  required
+                  placeholder="John Doe" 
+                  className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#f53a87] focus:ring-1 focus:ring-[#f53a87] transition-all" 
+                />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold text-gray-500 uppercase">Empresa</label>
-                <input type="text" placeholder="Acme Inc." className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#c126cb] focus:ring-1 focus:ring-[#c126cb] transition-all" />
+                <label className="text-xs font-bold text-gray-500 uppercase">Empresa (Opcional)</label>
+                <input 
+                  type="text" 
+                  name="empresa"
+                  value={formData.empresa}
+                  onChange={handleChange}
+                  placeholder="Acme Inc." 
+                  className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#c126cb] focus:ring-1 focus:ring-[#c126cb] transition-all" 
+                />
               </div>
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-xs font-bold text-gray-500 uppercase">Email</label>
-              <input type="email" placeholder="john@example.com" className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#f53a87] focus:ring-1 focus:ring-[#f53a87] transition-all" />
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="john@example.com" 
+                className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#f53a87] focus:ring-1 focus:ring-[#f53a87] transition-all" 
+              />
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="text-xs font-bold text-gray-500 uppercase">Mensaje</label>
-              <textarea rows={4} placeholder="Cuéntanos sobre tu proyecto..." className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#c126cb] focus:ring-1 focus:ring-[#c126cb] transition-all resize-none" />
+              <textarea 
+                rows={4} 
+                name="mensaje"
+                value={formData.mensaje}
+                onChange={handleChange}
+                required
+                placeholder="Cuéntanos sobre tu proyecto..." 
+                className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#c126cb] focus:ring-1 focus:ring-[#c126cb] transition-all resize-none" 
+              />
             </div>
 
-            <button type="button" className="group mt-2 w-full bg-gradient-to-r from-[#f53a87] to-[#c126cb] text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(193,38,203,0.3)]">
+            <button type="submit" className="group mt-2 w-full bg-gradient-to-r from-[#f53a87] to-[#c126cb] text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(193,38,203,0.3)]">
               Enviar Mensaje
               <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>

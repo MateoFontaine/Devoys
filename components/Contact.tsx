@@ -12,14 +12,14 @@ export const Contact = () => {
     mensaje: ""
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleWhatsApp = (e) => {
+  const handleWhatsApp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { nombre, empresa, email, mensaje } = formData;
     

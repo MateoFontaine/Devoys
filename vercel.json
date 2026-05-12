@@ -8,5 +8,11 @@
       "source": "/menu/:path*",
       "destination": "https://menu-digital-chi.vercel.app/menu/:path*"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/monitor?token=devoys_monitor_2026",
+      "schedule": "0 * * * *"
+    }
   ]
 }
